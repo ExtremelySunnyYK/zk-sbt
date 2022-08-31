@@ -115,3 +115,6 @@ The need for a trusted setup boils down to the fact that the balance between pri
 ## Contract deployment
 1. Compile contracts
 2. Deploy and verify
+
+## Architecture
+![image](https://user-images.githubusercontent.com/46377366/187735627-375fc143-ef85-40ff-b202-7c8a7efcf3e1.png)

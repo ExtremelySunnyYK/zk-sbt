@@ -1,6 +1,8 @@
 # zk-sbt
 
-A basic circom project using [Hardhat](https://github.com/nomiclabs/hardhat) and [hardhat-circom](https://github.com/projectsophon/hardhat-circom). 
+A basic circom project using starter developed by Blaine & Brian:
+- using [Hardhat](https://github.com/nomiclabs/hardhat) 
+- [hardhat-circom](https://github.com/projectsophon/hardhat-circom). 
 
 This combines the multiple steps of the [Circom](https://github.com/iden3/circom) and [SnarkJS](https://github.com/iden3/snarkjs) workflow into your [Hardhat](https://hardhat.org) workflow.
 
@@ -11,7 +13,15 @@ By providing configuration containing your Phase 1 Powers of Tau and circuits, t
 3. Output your `wasm` and `zkey` files
 4. Generate and output a `Verifier.sol`
 
-## Install
+## Demo 
+
+For demo purposes for the toy example, we have included the html file over at `app/`
+
+To run the application, just run `app/toy_demo.html` as a html file
+
+**To generate the following contract by yourself, you can refer to the instructions below:**
+
+## Installing Dependencies
 
 Clone this repository
 
@@ -102,3 +112,6 @@ The need for a trusted setup boils down to the fact that the balance between pri
 
 `snarkjs setup -r circuit.r1cs` : This will generate both a proving and a verification key in the form of two files: proving_key.json and verification_key.json.
 
+## Contract deployment
+1. Compile contracts
+2. Deploy and verify

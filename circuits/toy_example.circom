@@ -1,27 +1,27 @@
 pragma circom 2.0.6;
 
 include "circomlib/poseidon.circom";
-// include "https://github.com/0xPARC/circom-secp256k1/blob/master/circuits/bigint.circom";
 
 template Example () {
-    signal input a;
-    signal input b;
+    signal input threshold;
+    signal input credit_score;
     signal output c;
     
-    c <== a * b;
+    c <== credit_score - threshold;
 
-    assert(a > 2);
+    assert(credit_score > 2);
+    assert(c >= 0 );
     
-    component hash = Poseidon(2);
-    hash.inputs[0] <== a;
-    hash.inputs[1] <== b;
+    component hash = Poseidon(2); // generates hash using poseidon function from circom library
+    hash.inputs[0] <== threshold;
+    hash.inputs[1] <== credit_score;
 
     log("hash", hash.out);
 }
 
-component main { public [ a ] } = Example();
+component main { public [ threshold  ] } = Example();
 
 /* INPUT = {
-    "a": "5",
-    "b": "77"
+    "threshold": "5",
+    "credit_score": "77"
 } */

@@ -13,7 +13,7 @@ By providing configuration containing your Phase 1 Powers of Tau and circuits, t
 3. Output your `wasm` and `zkey` files
 4. Generate and output a `Verifier.sol`
 
-## Demo 
+### Demo of ZKSBT
 
 For demo purposes for the toy example, we have included the html file over at `app/`
 

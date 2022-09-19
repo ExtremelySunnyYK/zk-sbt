@@ -21,15 +21,16 @@ if [[ $* == *--nodejs* ]]
 then
     echo "Using nodejs \n" 
     cd circuit_js 
-    node generate_witness.js circuit.wasm ./input.json witness.wtns
+    node generate_witness.js circuit.wasm ../input.json witness.wtns
 else
     echo "Using cpp" # Faster for larger circuits
     cd circuit_cpp # Make to compile the cpp code that generates witness
     make
-    ./generate_witness ./input.json witness.wtns
+    ./generate_witness ../input.json witness.wtns
 fi
 
-cp witness.wtns ./witness.wtns
+cp witness.wtns ../witness.wtns
+cd ..
 
 # Use snarkjs to generate and validate proof
 
@@ -64,7 +65,7 @@ snarkjs groth16 verify verification_key.json public.json proof.json
 
 
 # generate solidity code
-# snarkjs zkey export solidityverifier circuit_0001.zkey verifier.sol
+# snarkjs zkey export solidityverifier circuit_0001.zkey Verifier.sol
 
 # generate and print parameters of call
 # snarkjs generatecall | tee parameters.txt

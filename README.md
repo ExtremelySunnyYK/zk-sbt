@@ -1,6 +1,6 @@
 # zk-sbt
 
-A basic circom project using starter developed by Blaine & Brian:
+A Zero Knowledge Soul Bound token project using starter developed by Blaine & Brian:
 - using [Hardhat](https://github.com/nomiclabs/hardhat) 
 - [hardhat-circom](https://github.com/projectsophon/hardhat-circom). 
 

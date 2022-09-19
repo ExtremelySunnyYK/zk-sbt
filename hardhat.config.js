@@ -1,4 +1,6 @@
 require("hardhat-circom");
+require('@openzeppelin/hardhat-upgrades');
+
 
 /**
  * @type import('hardhat/config').HardhatUserConfig

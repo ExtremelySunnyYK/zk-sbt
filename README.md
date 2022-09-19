@@ -1,19 +1,14 @@
 # zk-sbt
 
-A Zero Knowledge Soul Bound token project using starter developed by Blaine & Brian:
-- using [Hardhat](https://github.com/nomiclabs/hardhat) 
-- [hardhat-circom](https://github.com/projectsophon/hardhat-circom). 
+This repository is an example of how zK-Snarks can be combined with the concept of Soul Bound Token.
 
-This combines the multiple steps of the [Circom](https://github.com/iden3/circom) and [SnarkJS](https://github.com/iden3/snarkjs) workflow into your [Hardhat](https://hardhat.org) workflow.
+This follows part 3 of Spartan Labs Soul Bound Token Article series:
 
-By providing configuration containing your Phase 1 Powers of Tau and circuits, this plugin will:
+- [Part 1: The ABCs of SBT](https://medium.com/@spartanlabs/the-construction-of-the-soul-part-1-the-abcs-of-sbt-5f7776a88479)
+- Part 2: TBD
+- Part 3: TBD
 
-1. Compile the circuits
-2. Apply the final beacon
-3. Output your `wasm` and `zkey` files
-4. Generate and output a `Verifier.sol`
-
-### Demo of ZKSBT
+## Demo of ZKSBT
 
 For demo purposes for the toy example, we have included the html file over at `app/`
 
@@ -21,7 +16,7 @@ To run the application, just run `app/toy_demo.html` as a html file
 
 **To generate the following contract by yourself, you can refer to the instructions below:**
 
-## Installing Dependencies
+### Installing Dependencies
 
 Clone this repository
 
@@ -73,7 +68,7 @@ For more information on setting up, visit [Their README](https://github.com/iden
 
 ## Using the app
 ```
-npm -i
+npm -i # installs all dependencies
 ```
 
 Run `app/index.html`
@@ -118,3 +113,18 @@ The need for a trusted setup boils down to the fact that the balance between pri
 
 ## Architecture
 ![image](https://user-images.githubusercontent.com/46377366/187735627-375fc143-ef85-40ff-b202-7c8a7efcf3e1.png)
+
+## Credits
+A Zero Knowledge Soul Bound token project using starter developed by Blaine & Brian:
+
+- using [Hardhat](https://github.com/nomiclabs/hardhat)
+- [hardhat-circom](https://github.com/projectsophon/hardhat-circom).
+
+This combines the multiple steps of the [Circom](https://github.com/iden3/circom) and [SnarkJS](https://github.com/iden3/snarkjs) workflow into your [Hardhat](https://hardhat.org) workflow.
+
+By providing configuration containing your Phase 1 Powers of Tau and circuits, this plugin will:
+
+1. Compile the circuits
+2. Apply the final beacon
+3. Output your `wasm` and `zkey` files
+4. Generate and output a `Verifier.sol`

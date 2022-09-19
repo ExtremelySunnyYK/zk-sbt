@@ -1,6 +1,7 @@
 pragma circom 2.0.6;
 
-include "./utils/circuits/comparators.circom";
+include "circomlib/comparators.circom";
+// include "./utils/circuits/comparators.circom";
 
 template Demo () {
     signal input threshold;

@@ -141,7 +141,7 @@ contract zkSBT is Ownable {
     ) public view returns (bool) {
         require(hasSoul(_soul), "Soul does not exist");
 
-        string memory soulData = getSBTData(_soul);
+        string memory soulData = getSBTData(_soul); // This can be used to check if the user input is the same as the data in the mapping. For our Demo, we would not be using this
         Verifier verifier = Verifier(verifierAddress);
 
         return verifier.verifyProof(a, b, c, input); // Using zkSNARK verification

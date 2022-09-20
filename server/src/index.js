@@ -1,5 +1,7 @@
 import express from 'express';
 import fs from 'fs'
+import cors from 'cors';
+
 
 import { generateProof, verifyProof } from "./lib/generateProof.js";
 import errorHandler from "./utils/errorHandler.js";
@@ -7,6 +9,15 @@ import errorHandler from "./utils/errorHandler.js";
 const app = express()
 
 const port = 8080
+
+const corsOptions = {
+  // To allow requests from client
+  origin: ['http://13.214.158.13:3000', 'http://localhost:3000'],
+  credentials: true,
+  exposedHeaders: ['set-cookie'],
+};
+app.use(cors(corsOptions));
+
 
 app.get('/', (req, res, next) => {
   res.send('Hello World!')
@@ -25,7 +36,6 @@ app.get('/api/generate-proof', async (req, res, next) => {
     if (proof == null) {
       return res.status(400).send('creditScore must more than 5');
     }
-    console.log(proof);
     return res.status(200).json({ proof, publicSignals });
 
   } catch (error) {

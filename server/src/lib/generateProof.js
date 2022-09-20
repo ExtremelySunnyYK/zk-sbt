@@ -1,13 +1,14 @@
 import * as snarkjs from "snarkjs";
 
-const circuitWasm = "./config/circuit.wasm";
-const finalZkey = "./config/circuit_0001.zkey";
-const verificationKeyPath = "./config/verification_key.json";
+// Current working directory is server/
+const circuitWasm = "./src/config/circuit.wasm";
+const finalZkey = "./src/config/circuit_0001.zkey";
+const verificationKeyPath = "./src/config/verification_key.json";
 
 export async function generateProof(creditScore) {
     try {
         const inputSignal = {
-            "threshold": 9,
+            "threshold": 5,
             "credit_score": creditScore
         };
         const { proof, publicSignals } = await snarkjs.groth16.fullProve(
@@ -18,8 +19,6 @@ export async function generateProof(creditScore) {
         return { proof, publicSignals };
     }
     catch (error) {
-        console.log("Error name", error.message);
-
         // check if it returns Error: Assert Failed.
         if (error.message.includes("Assert Failed")) {
             return { proof: null, publicSignals: null };

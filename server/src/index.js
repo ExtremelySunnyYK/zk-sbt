@@ -19,13 +19,11 @@ app.get('/api/generate-proof', async (req, res, next) => {
     if (isNaN(creditScore)) {
       return res.status(400).send('creditScore must be a number');
     }
-
-    console.log(creditScore);
     const { proof, publicSignals } = await generateProof(creditScore);
 
     // check if proofJson is null
     if (proof == null) {
-      return res.status(400).send('creditScore must be less than 5');
+      return res.status(400).send('creditScore must more than 5');
     }
     console.log(proof);
     return res.status(200).json({ proof, publicSignals });

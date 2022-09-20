@@ -25,17 +25,20 @@ async function main() {
 	
 	// Verify contract on Etherscan
 	console.log("\nVerifying zkSBT contract on Etherscan...");
-	await hre.run("verify:verify", {
-		address: zkSBT.address,
-		contract: "contracts/zkSBT.sol:zkSBT",
-		constructorArguments: ["Spartan Labs ZK SBT", "zkSBT"],
-	});
-		console.log("Verifying Verifier contract on Etherscan...");
+	
+	console.log("Verifying Verifier contract on Etherscan...");
 	await hre.run("verify:verify", {
 		address: verifier.address,
 		contract: "contracts/Verifier.sol:Verifier",
 		constructorArguments: [],
 	});
+	await hre.run("verify:verify", {
+		address: zkSBT.address,
+		contract: "contracts/zkSBT.sol:zkSBT",
+		constructorArguments: ["Spartan Labs ZK SBT", "zkSBT"],
+	});
+
+
 
 	console.log("Contracts verified on Etherscan!");
 	console.log("Address of zkSBT contract:", zkSBT.address);

@@ -1,4 +1,6 @@
-# Demo
+# html app
+
+**This was v1 of the demo.**
 
 
 We have 2 demo files, one is for the toy example in our article and the other is for you to genereate your own.

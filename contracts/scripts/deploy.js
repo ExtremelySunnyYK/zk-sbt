@@ -1,12 +1,20 @@
-import { ethers } from "hardhat";
+const { ethers } = require("hardhat");
 
 async function main() {
-  const Greeter = await ethers.getContractFactory("Greeter");
-  const greeter = await Greeter.deploy("Hello, Hardhat!");
 
-  await greeter.deployed();
+	// Deploy Verifier Contract
+  const VerifierContract = await ethers.getContractFactory("Verifier");
+	console.log("\nDeploying Verifier contract...");
+	const verifier = await VerifierContract.deploy();
+	console.log("Verifier contract deployed to:", verifier.address);
 
-  console.log("Greeter deployed to:", greeter.address);
+	// Deploy zkSBT Contract
+	const zkSBTContract = await ethers.getContractFactory("zkSBT");
+	console.log("\nDeploying zkSBT contract...");
+	const zkSBT = await zkSBTContract.deploy("Spartan Labs ZK SBT", "zkSBT");
+	console.log("zkSBT contract deployed to:", zkSBT.address);
+
+
 }
 
 main()

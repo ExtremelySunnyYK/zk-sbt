@@ -69,3 +69,4 @@ snarkjs groth16 verify verification_key.json public.json proof.json
 
 # generate and print parameters of call
 # snarkjs generatecall | tee parameters.txt
+# snarkjs generatecall --proof proof.json --pub pub.json

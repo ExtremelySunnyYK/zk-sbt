@@ -55,19 +55,15 @@ contract zkSBT is Ownable {
     }
 
     /**
-     * @dev Mints `SBT` and transfers it to `_soul`.
+     * @dev Mints `SBT` and transfers it to `sender`.
      *
      * Emits a {Mint} event.
      */
-    function mint(address _soul, string memory _soulData)
-        external
-        virtual
-        validAddress(_soul)
-    {
-        require(!hasSoul(_soul), "Soul already exists");
-        souls[_soul] = _soulData;
+    function mint(string memory _soulData) external virtual {
+        require(!hasSoul(msg.sender), "Soul already exists");
+        souls[msg.sender] = _soulData;
         _totalSBT++;
-        emit Mint(_soul);
+        emit Mint(msg.sender);
     }
 
     /**
@@ -87,6 +83,7 @@ contract zkSBT is Ownable {
     {
         require(hasSoul(_soul), "Soul does not exists");
         delete souls[_soul];
+        _totalSBT--;
         emit Burn(_soul);
     }
 

@@ -1,7 +1,7 @@
 import express from 'express';
 import fs from 'fs'
 
-import { generateProof } from "./lib/generateProof.js";
+import { generateProof, verifyProof } from "./lib/generateProof.js";
 import errorHandler from "./utils/errorHandler.js";
 
 const app = express()
@@ -35,6 +35,19 @@ app.get('/api/generate-proof', async (req, res, next) => {
     next(error);
   }
 })
+
+app.post('/api/verify-proof', async (req, res, next) => {
+  try {
+    const { proof, publicSignals } = req.body;
+    const result = await verifyProof(proof, publicSignals);
+    return res.status(200).json({ result });
+  } catch (error) {
+    console.log(`Error Message ${error.message}`);
+    next(error);
+  }
+})
+
+
 app.use(errorHandler);
 
 

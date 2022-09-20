@@ -1,7 +1,8 @@
 import * as snarkjs from "snarkjs";
 
-const circuitWasm = "./bin/circuit.wasm";
-const finalZkey = "./bin/circuit_0001.zkey";
+const circuitWasm = "./config/circuit.wasm";
+const finalZkey = "./config/circuit_0001.zkey";
+const verificationKeyPath = "./config/verification_key.json";
 
 export async function generateProof(creditScore) {
     try {
@@ -26,7 +27,7 @@ export async function generateProof(creditScore) {
     }
 }
 
-async function verifyProof(proofJson, publicSignals) {
+export async function verifyProof(proofJson, publicSignals) {
     const verificationKey = await getVerificationKey();
     const result = await snarkjs.groth16.verify(
         verificationKey,
@@ -44,14 +45,9 @@ async function verifyProofOnchain(publicJson, proofJson) {
     return result;
 }
 
-async function getProvingKey() {
-    return await fetch("../../circuits/demo/proving_key.json").then(function (res) {
-        return res.json();
-    });
-}
 
 async function getVerificationKey() {
-    return await fetch("../../circuits/demo/verification_key.json").then(function (res) {
+    return await fetch(verificationKeyPath).then(function (res) {
         return res.json();
     });
 }

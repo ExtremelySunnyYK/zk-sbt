@@ -13,3 +13,4 @@ circuits/*.wasm
 circuits/*.zkey
 
 .vscode/
+.env

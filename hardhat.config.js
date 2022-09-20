@@ -7,6 +7,18 @@ require('dotenv').config();
  */
 module.exports = {
   solidity: {
+  compilers: [
+    {
+      version: "0.6.11",
+    },
+    {
+      version: "0.8.9",
+    },
+  ],
+},
+  etherscan: {
+    apiKey: process.env.ETHERSCAN_API_KEY,
+  },
   gasReporter: {
     currency: "USD",
     coinmarketcap: process.env.COINMARKETCAP || null,
@@ -19,16 +31,6 @@ module.exports = {
       accounts: [process.env.PRIVATE_KEY],
    }
   },
-
-  compilers: [
-    {
-      version: "0.6.11",
-    },
-    {
-      version: "0.8.9",
-    },
-  ],
-},
   circom: {
   inputBasePath: "./circuits",
     ptau: "https://hermezptau.blob.core.windows.net/ptau/powersOfTau28_hez_final_15.ptau",

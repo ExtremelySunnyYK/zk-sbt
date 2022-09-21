@@ -3,7 +3,7 @@ import fs from 'fs'
 import cors from 'cors';
 
 
-import { generateProof, verifyProof } from "./lib/generateProof.js";
+import { generateProof, verifyProof, generateCallData } from "./lib/zkUtils.js";
 import errorHandler from "./utils/errorHandler.js";
 
 const app = express()
@@ -12,7 +12,7 @@ const port = 8080
 
 const corsOptions = {
   // To allow requests from client
-  origin: ['http://13.214.158.13:3000', 'http://localhost:3000'],
+  origin: ['http://localhost:3000', 'http://localhost:3001', 'http://localhost:3002'],
   credentials: true,
   exposedHeaders: ['set-cookie'],
 };
@@ -23,20 +23,23 @@ app.get('/', (req, res, next) => {
   res.send('Hello World!')
 })
 
-app.get('/api/generate-proof', async (req, res, next) => {
+
+app.get('/api/generate-call-data', async (req, res, next) => {
   try {
+    console.log('Generating proof...');
     const creditScore = req.query.creditScore;
     // check if creditScore is a number
     if (isNaN(creditScore)) {
       return res.status(400).send('creditScore must be a number');
     }
-    const { proof, publicSignals } = await generateProof(creditScore);
+    const { a, b, c, Input } = await generateCallData(creditScore);
+    console.log('Call Data Generated' + a + b + c + Input);
 
-    // check if proofJson is null
-    if (proof == null) {
-      return res.status(400).send('creditScore must more than 5');
+    if (a === null || b === null || c === null || Input === null) {
+      return res.status(400).send('Error generating call data');
     }
-    return res.status(200).json({ proof, publicSignals });
+    return res.status(200).send({ a, b, c, Input });
+
 
   } catch (error) {
     console.log(`Error Message ${error.message}`);
@@ -55,6 +58,28 @@ app.post('/api/verify-proof', async (req, res, next) => {
   }
 })
 
+app.get('/api/generate-proof', async (req, res, next) => {
+  try {
+    console.log('Generating proof...');
+    const creditScore = req.query.creditScore;
+    console.log('creditScore', creditScore);
+    // check if creditScore is a number
+    if (isNaN(creditScore)) {
+      return res.status(400).send('creditScore must be a number');
+    }
+    const { proof, publicSignals } = await generateProof(creditScore);
+
+    // check if proofJson is null
+    if (proof == null) {
+      return res.status(400).send('creditScore must more than 5');
+    }
+    return res.status(200).json({ proof, publicSignals });
+
+  } catch (error) {
+    console.log(`Error Message ${error.message}`);
+    next(error);
+  }
+})
 
 app.use(errorHandler);
 

@@ -37,6 +37,6 @@ Create an `.env` file and store the following
 
 The Contracts are deployed and verified here:
 
-`Verifier.sol`: [0x03bDcf58fd0E6047E10206FB655A5BDFd724df6F]
+`Verifier.sol`: [0xA5578AF6d7d5dEA23020268004F6c2Fe3C2F0621](https://goerli.etherscan.io/address/0xA5578AF6d7d5dEA23020268004F6c2Fe3C2F0621#contracts)
 
 `zkSBT.sol`: [0x51B543C4a9d38E747a3c1963b76E42d8Ad696ef4](https://goerli.etherscan.io/address/0x51B543C4a9d38E747a3c1963b76E42d8Ad696ef4#code)

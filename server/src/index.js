@@ -37,6 +37,12 @@ app.get('/api/generate-call-data', async (req, res, next) => {
     if (a === null || b === null || c === null || Input === null) {
       return res.status(400).send('Error generating call data');
     }
+
+    console.log("Call Data Generated");
+    console.log("a", a);
+    console.log("b", b);
+    console.log("c", c);
+    console.log("Input", Input);
     return res.status(200).send({ a, b, c, Input });
 
 

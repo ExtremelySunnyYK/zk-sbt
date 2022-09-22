@@ -3,13 +3,13 @@ require("@nomiclabs/hardhat-etherscan");
 
 async function main() {
 
-	// // Deploy Verifier Contract
-  // const VerifierContract = await ethers.getContractFactory("Verifier");
-	// console.log("\nDeploying Verifier contract...");
-	// const verifier = await VerifierContract.deploy();
-	// await verifier.deployed();
+	// Deploy Verifier Contract
+  const VerifierContract = await ethers.getContractFactory("Verifier");
+	console.log("\nDeploying Verifier contract...");
+	const verifier = await VerifierContract.deploy();
+	await verifier.deployed();
 
-	// console.log("Verifier contract deployed to:", verifier.address);
+	console.log("Verifier contract deployed to:", verifier.address);
 
 	// Deploy zkSBT Contract
 	const zkSBTContract = await ethers.getContractFactory("zkSBT");
@@ -25,13 +25,13 @@ async function main() {
 	
 	// Verify contract on Etherscan
 	console.log("\nVerifying zkSBT contract on Etherscan...");
-	
-	// console.log("Verifying Verifier contract on Etherscan...");
-	// await hre.run("verify:verify", {
-	// 	address: verifier.address,
-	// 	contract: "contracts/Verifier.sol:Verifier",
-	// 	constructorArguments: [],
-	// });
+	console.log("Verifying Verifier contract on Etherscan...");
+
+	await hre.run("verify:verify", {
+		address: verifier.address,
+		contract: "contracts/Verifier.sol:Verifier",
+		constructorArguments: [],
+	});
 
 	await hre.run("verify:verify", {
 		address: zkSBT.address,
@@ -43,7 +43,7 @@ async function main() {
 
 	console.log("Contracts verified on Etherscan!");
 	console.log("Address of zkSBT contract:", zkSBT.address);
-	// console.log("Address of Verifier contract:", verifier.address);
+	console.log("Address of Verifier contract:", verifier.address);
 
 }
 

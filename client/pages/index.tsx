@@ -63,7 +63,6 @@ const Home: NextPage = () => {
   const { config: zksbtMintConfig } = usePrepareContractWrite({
     ...zksbtContractConfig,
     functionName: 'mint',
-    // args: [["1", "2"], [["2", "3"],["3","4"]], ["3","4"], ["4","5"]],
     args: [getCallData.a, getCallData.b, getCallData.c, getCallData.inputs],
   });
 
@@ -102,7 +101,6 @@ const Home: NextPage = () => {
     args: [address]
   });
 
-  console.log("sbtData", sbtData);
 
   // console.log("sbtArrayData", sbtData[0]);
 
@@ -130,13 +128,14 @@ const Home: NextPage = () => {
     axios.get(`${generateCallDataUrl}?creditScore=${getCreditScore}`)
       .then((response) => {
         const callData = convertCallDataToIntegers(response.data);
+        console.log("callData", callData);
         setCallData(callData);
-        console.log("RESPONSE",response.data);
+        // setCallData(callData);
         // setCallData(response.data);
       })
       .catch((error) => {
         console.log(error);
-      });
+      })
   };
 
   const convertCallDataToIntegers = (responseData) => {
@@ -165,9 +164,9 @@ const Home: NextPage = () => {
     
     // If call data is not empty, mint
     if (Object.keys(getCallData).length !== 0) {
+      console.log("Call data minted", getCallData);
+
       mint?.();
-      console.log(getCallData);
-      // alert("Minting SBT");
       return
     }
     else {

@@ -32,3 +32,6 @@ a {
   transition: all ease 100ms;
 }
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

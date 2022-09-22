@@ -17,7 +17,7 @@ export async function generateCallData(creditScore) {
             .replace(/["[\]\s]/g, "")
             .split(",")
             .map((x) => BigInt(x).toString());
-
+        console.log("ARGV",calldata)
         const a = [argv[0], argv[1]];
         const b = [
             [argv[2], argv[3]],

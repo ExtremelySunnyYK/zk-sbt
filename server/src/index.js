@@ -33,7 +33,6 @@ app.get('/api/generate-call-data', async (req, res, next) => {
       return res.status(400).send('creditScore must be a number');
     }
     const { a, b, c, Input } = await generateCallData(creditScore);
-    console.log('Call Data Generated' + a + b + c + Input);
 
     if (a === null || b === null || c === null || Input === null) {
       return res.status(400).send('Error generating call data');
@@ -62,7 +61,6 @@ app.get('/api/generate-proof', async (req, res, next) => {
   try {
     console.log('Generating proof...');
     const creditScore = req.query.creditScore;
-    console.log('creditScore', creditScore);
     // check if creditScore is a number
     if (isNaN(creditScore)) {
       return res.status(400).send('creditScore must be a number');

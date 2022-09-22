@@ -17,7 +17,6 @@ interface IVerifier {
     ) external view returns (bool);
 }
 
-
 /**
  * @dev Implementation of Soul Bound Token (SBT)
  * Following Vitalik's co-authored whitepaper at: https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4105763
@@ -76,8 +75,14 @@ contract zkSBT is Ownable {
      *
      * Emits a {Mint} event.
      */
-    function mint(Proof memory _soulData) external virtual {
+    function mint(
+        uint256[2] memory a,
+        uint256[2][2] memory b,
+        uint256[2] memory c,
+        uint[2] memory input
+    ) external virtual {
         require(!hasSoul(msg.sender), "Soul already exists");
+        Proof memory _soulData = Proof(a, b, c, input);
         souls[msg.sender] = _soulData;
         _totalSBT++;
         emit Mint(msg.sender);
@@ -129,9 +134,19 @@ contract zkSBT is Ownable {
         view
         virtual
         validAddress(_soul)
-        returns (Proof memory)
+        returns (
+            uint256[2] memory,
+            uint256[2][2] memory,
+            uint256[2] memory,
+            uint[2] memory
+        )
     {
-        return (souls[_soul]);
+        return (
+            souls[_soul].a,
+            souls[_soul].b,
+            souls[_soul].c,
+            souls[_soul].input
+        );
     }
 
     /**
@@ -144,19 +159,22 @@ contract zkSBT is Ownable {
      *
      * @return true if the proof is valid, false otherwise
      */
-    function validateAttribute(
-        address _soul,
-        address verifierAddress
-    ) public view returns (bool) {
+    function validateAttribute(address _soul, address verifierAddress)
+        public
+        view
+        returns (bool)
+    {
         require(hasSoul(_soul), "Soul does not exist");
 
-        Proof memory soulData = getSBTData(_soul);
-        uint256[2] memory a = soulData.a;
-        uint256[2][2] memory b = soulData.b;
-        uint256[2] memory c = soulData.c;
-        uint256[2] memory input = soulData.input;
-        
-        return IVerifier(verifierAddress).verifyProof(a, b, c, input); // Using zkSNARK verification
+        Proof memory _soulData = souls[_soul];
+        IVerifier verifier = IVerifier(verifierAddress);
+        return
+            verifier.verifyProof(
+                _soulData.a,
+                _soulData.b,
+                _soulData.c,
+                _soulData.input
+            ); // Using zkSNARK verification
     }
 
     /**
@@ -203,8 +221,7 @@ contract zkSBT is Ownable {
         validAddress(_soul)
         returns (bool)
     {
-        Proof memory soulData = getSBTData(_soul);
-        return (soulData.a[0] != 0 || soulData.a[1] != 0);
+        return souls[_soul].input[0] != 0;
         // return bytes(soulData).length > 0;
     }
 

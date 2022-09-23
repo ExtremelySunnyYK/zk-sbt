@@ -5,8 +5,10 @@ import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 import axios from 'axios';
 import { generateProofUrl, generateCallDataUrl } from '../globals/urlConfig';
-import { BigNumber } from 'ethers';
+import { BigNumber, utils } from 'ethers';
 import Link from 'next/link'
+import Image from 'next/image'
+
 
 import {
   useAccount,
@@ -22,10 +24,7 @@ import zkSBTInterface from '../abi/zksbt.json';
 import Router from 'next/router';
 
 
-const verifierContractConfig = {
-  addressOrName: '0x03bDcf58fd0E6047E10206FB655A5BDFd724df6F',
-  contractInterface: verifierInterface,
-};
+const verifierContractAddress = "0xA5578AF6d7d5dEA23020268004F6c2Fe3C2F0621"
 
 
 const zksbtContractConfig = {
@@ -39,19 +38,13 @@ const Home: NextPage = () => {
   const [mounted, setMounted] = React.useState(false);
   React.useEffect(() => setMounted(true), []);
   const [totalMinted, setTotalMinted] = React.useState(0);
+  const [getHasSoul, setHasSoul] = React.useState(false);
   const { isConnected } = useAccount();
   const [getCreditScore, setCreditScore] = React.useState('');
-  const [getHashedCreditScore, setHashedCreditScore] = React.useState('');
-  const [getProof, setProof] = React.useState('');
-  const [getPublicSignals, setPublicSignals] = React.useState('');
+  const [getVerificationAddress, setVerificationAddress] = React.useState('');
   const [getCallData, setCallData] = React.useState({});
+  const [getVerificationStatus, setVerificationStatus] = React.useState(null);
 
-  // call data
-  // const {getA, getB, getC, getInputs} = useContractRead(zksbtContractConfig);
-  // const {getA, setA} = React.useState([]);
-  // const {getB, setB} = React.useState([]);
-  // const {getC, setC} = React.useState([]);
-  // const {getInputs, setInputs} = React.useState([]);
 
   // get wallet address
   const { address, isConnecting, isDisconnected } = useAccount()
@@ -92,7 +85,7 @@ const Home: NextPage = () => {
     watch: true,
   });
 
-  // // SBT Data
+  // SBT Data
   const { data: sbtData } = useContractRead({
     ...zksbtContractConfig,
     functionName: 'getSBTData',
@@ -101,6 +94,16 @@ const Home: NextPage = () => {
     args: [address]
   });
 
+  
+
+  const { data: addressVerified } = useContractRead({
+    ...zksbtContractConfig,
+    functionName: 'validateAttribute',
+    // wallet address as arg
+    cacheTime: 2_000,
+    // enabled: false,
+    args: [getVerificationAddress, verifierContractAddress]
+  });
 
   // console.log("sbtArrayData", sbtData[0]);
 
@@ -112,15 +115,41 @@ const Home: NextPage = () => {
     args: [address]
   });
 
+  const { data: verifyingAddressHasSoul } = useContractRead({
+    ...zksbtContractConfig,
+    functionName: 'hasSoul',
+    watch: true,
+    args: [getVerificationAddress]
+  });
+
   React.useEffect(() => {
     if (totalSupplyData) {
       setTotalMinted(totalSupplyData.toNumber());
     }
   }, [totalSupplyData]);
 
+  React.useEffect(() => {
+    if (hasSoul) {
+      setHasSoul(true);
+    } else {
+      setHasSoul(false);
+    }
+  }, [hasSoul]);
+
+  React.useEffect(() => {
+      if (getVerificationAddress) {
+        setVerificationAddress(getVerificationAddress);
+      }
+    }
+  , [getVerificationAddress]);
+
   function handleCreditScoreChange(e: any) {
     setCreditScore(e.target.value);
   }
+  function handleVerificationAddressChange(e: any) {
+    setVerificationAddress(e.target.value);
+  }
+
 
   /** API Call Functions */
 
@@ -175,10 +204,30 @@ const Home: NextPage = () => {
     }
   }
 
-  async function handleVerifyButtonClick(address: string) {
-    // Get Call Data onchain
+  async function handleVerifyButtonClick() {
+    // check if the input is a valid address
+    if (!utils.isAddress(getVerificationAddress)) {
+      setVerificationStatus(null);
+      alert("Please enter a valid address");
+      return;
+    }
+    // // check if the address has a SBT
+    if (!verifyingAddressHasSoul) {
+      setVerificationStatus(null);
+      alert("Address does not have a SBT");
+      return;
+    }
+    
+    // check if the address has been verified    
+    if (addressVerified) {
+      setVerificationStatus(true);
+      return;
+    }
 
-    // call verifyProof Function with data
+    else if (!addressVerified) {
+      setVerificationStatus(false);
+      return;
+    }
   }
 
 
@@ -191,22 +240,31 @@ const Home: NextPage = () => {
           name="zkSBT Demo"
           content="by @spartan-labs"
         />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon.png" />
       </Head>
 
       <main className={styles.main}>
         <ConnectButton />
-
+        <div className='md:container md:mx-auto'>
         <h1 className={styles.title}>
-          zKSBT Mint Demo by <a href="https://spartanlabs.studio/">Spartan Labs</a> 
-        </h1>
-
+            zKSBT Mint Demo by <a href="https://spartanlabs.studio/">Spartan Labs</a>
+          </h1>
+          <span className='flex items-center justify-center pb-5'>
+                       <Image
+            className='object-none object-center'
+            alt="Spartan Labs Logo"
+            src="/favicon.png"
+            width={50}
+            height={50}
+            />
+          </span>
+        </div>
         <p className={styles.description}>
           {totalMinted} Soul Bound Token minted so far!
         </p>
 
         <div className={styles.grid}>
-          <a href="https://faucet.paradigm.xyz/" className={styles.card}>
+          <a href="https://faucet.paradigm.xyz/" target="_blank" className={styles.card} rel="noreferrer">
             <h2>1. Get some Testnet ETH &rarr;</h2>
             <p>Before you do anything, you need some Goerlli ETH from Faucet🚰</p>
           </a>
@@ -271,7 +329,7 @@ const Home: NextPage = () => {
               <h2>3. View SBT details &rarr;</h2>
               <p>View your SBT details: </p>
 
-            {mounted && isConnected && (
+            {mounted && isConnected && getHasSoul && (
               // <p>SBT Details: {sbtData}</p>
               <span className="block">{
                 sbtData?.map((item, index) => {
@@ -290,20 +348,38 @@ const Home: NextPage = () => {
             <p>
               Verify if their credit score is above 5
             </p>
-          {mounted && isConnected && !isMinted && (
+            <form>
+              <label>
+                Address to verify:
+                <input type="text" 
+                placeholder='input address you want to verify'
+                required
+                value={getVerificationAddress} 
+                onChange={handleVerificationAddressChange} />
+              </label>
+            </form>
+              {mounted && isConnected && (
                   <button
                     style={{ marginTop: 2 }}
-                    disabled={isMintLoading || isMintStarted}
                     className="button"
-                    data-mint-loading={isMintLoading}
-                    data-mint-started={isMintStarted}
-                    onClick={() => handleMintButtonClick()}
+                    onClick={handleVerifyButtonClick}
                   >
-                    {isMintLoading && 'Waiting for approval'}
-                    {isMintStarted && 'Minting...'}
-                    {!isMintLoading && !isMintStarted && 'Mint'}
+                    Verify
                   </button>
-                )}
+          )}
+          
+          <div>
+            {(getVerificationStatus === true) && (
+              <span>
+              <p>Address has a SBT with credit score above 5</p>
+              </span>
+              
+            )}
+            {(getVerificationStatus === false) && (
+            <p>Address does not have a SBT with credit score above 5</p>
+            )}
+          </div>
+
             
           </div>
         <div>

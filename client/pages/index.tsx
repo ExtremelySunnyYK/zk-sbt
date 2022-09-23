@@ -50,7 +50,6 @@ const Home: NextPage = () => {
   const { address, isConnecting, isDisconnected } = useAccount()
 
   
-
   /* Helper Functions */
   // Minting
   const { config: zksbtMintConfig } = usePrepareContractWrite({
@@ -90,12 +89,10 @@ const Home: NextPage = () => {
     ...zksbtContractConfig,
     functionName: 'getSBTData',
     watch: true,
-    // wallet address as arg
     args: [address]
   });
 
   
-
   const { data: addressVerified } = useContractRead({
     ...zksbtContractConfig,
     functionName: 'validateAttribute',
@@ -105,7 +102,6 @@ const Home: NextPage = () => {
     args: [getVerificationAddress, verifierContractAddress]
   });
 
-  // console.log("sbtArrayData", sbtData[0]);
 
   // Check if user has SBT
   const { data: hasSoul } = useContractRead({
@@ -143,6 +139,11 @@ const Home: NextPage = () => {
     }
   , [getVerificationAddress]);
 
+  React.useEffect(() => {
+    console.log(getCallData)
+    mintSbt();
+  },[getCallData])
+
   function handleCreditScoreChange(e: any) {
     setCreditScore(e.target.value);
   }
@@ -154,20 +155,18 @@ const Home: NextPage = () => {
   /** API Call Functions */
 
   const getCallDataFromServer = async () => {
-    axios.get(`${generateCallDataUrl}?creditScore=${getCreditScore}`)
-      .then((response) => {
-        const callData = convertCallDataToIntegers(response.data);
-        console.log("callData", callData);
-        setCallData(callData);
-        // setCallData(callData);
-        // setCallData(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-  };
+    try{
+      const response =  await axios.get(`${generateCallDataUrl}?creditScore=${getCreditScore}`)
+      return convertCallDataToIntegers(response.data);
+      
+    } catch(error) {
+      console.log(error);
+      return {};
+    }
+  }
 
-  const convertCallDataToIntegers = (responseData) => {
+  // Helper 
+  const convertCallDataToIntegers = (responseData : {a:Array<string>,b:Array<Array<string>>,c:Array<string>,Input:Array<string>}) => {
     const a = responseData.a.map((item: any) => BigNumber.from(item));
     // Loop through array in b and convert to BigNumber.from
     const b = responseData.b.map((item: any) => {
@@ -177,6 +176,7 @@ const Home: NextPage = () => {
     const inputs = responseData.Input.map((item: any) => parseInt(item));
     return { a, b, c, inputs };
   };
+
 
   /** Event Handler */
   async function handleMintButtonClick() {
@@ -189,17 +189,14 @@ const Home: NextPage = () => {
       alert("Address already minted a SBT");
       return;
     }
-    await getCallDataFromServer(); 
-    
-    // If call data is not empty, mint
+    const callData = await getCallDataFromServer(); 
+    setCallData(callData);
+  }
+
+   function mintSbt() {
     if (Object.keys(getCallData).length !== 0) {
       console.log("Call data minted", getCallData);
-
       mint?.();
-      return
-    }
-    else {
-      alert("Please try clicking the mint button again");
       return
     }
   }
@@ -283,7 +280,6 @@ const Home: NextPage = () => {
                 onChange={handleCreditScoreChange} />
               </label>
             </form>
-               <div style={{ flex: '1 1 auto' }}>
               <div style={{ padding: '12px 12px 12px 0' }}>
 
                 {mintError && (
@@ -301,7 +297,7 @@ const Home: NextPage = () => {
                   <button
                     style={{ marginTop: 2 }}
                     disabled={isMintLoading || isMintStarted}
-                    className="button"
+                    className="button object-center"
                     data-mint-loading={isMintLoading}
                     data-mint-started={isMintStarted}
                     onClick={() => handleMintButtonClick()}
@@ -314,10 +310,9 @@ const Home: NextPage = () => {
                 {mounted && isConnected && isMinted && (
                   <div>
                   <p>Transaction Minted to</p>
-                    <a href={`https://goerli.etherscan.io/tx/${mintData?.hash}`}>{mintData?.hash.slice(0, 3)}...</a>
+                    <a href={`https://goerli.etherscan.io/tx/${mintData?.hash}`} target="_blank" rel="noreferrer">{mintData?.hash.slice(0, 10)}...</a>
                   </div>
                 )}
-              </div>
             </div>
           </div>
 
@@ -345,7 +340,7 @@ const Home: NextPage = () => {
           <div className={styles.card} >
             <h2>4. Verification of SBT &rarr;</h2>
             <p>Input in any address to get the SBT data of their Soul. </p>
-            <p>
+            <p className='font-light'>
               Verify if their credit score is above 5
             </p>
             <form>

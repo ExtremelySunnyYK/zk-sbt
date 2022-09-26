@@ -1,5 +1,4 @@
 import express from 'express';
-import fs from 'fs'
 import cors from 'cors';
 
 
@@ -20,7 +19,7 @@ app.use(cors(corsOptions));
 
 
 app.get('/', (req, res, next) => {
-  res.send('Hello World!')
+  res.status(200).send('Hello World!')
 })
 
 

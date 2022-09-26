@@ -8,7 +8,7 @@ import { generateProofUrl, generateCallDataUrl } from '../globals/urlConfig';
 import { BigNumber, utils } from 'ethers';
 import Link from 'next/link'
 import Image from 'next/image'
-
+import { useCallback } from 'react';
 
 import {
   useAccount,
@@ -139,10 +139,10 @@ const Home: NextPage = () => {
     }
   , [getVerificationAddress]);
 
-  React.useEffect(() => {
-    mintSbt();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[getCallData])
+  // React.useEffect(() => {
+  //   console.log(getCallData)
+  //   mintSbt();
+  // },[getCallData]);
 
   function handleCreditScoreChange(e: any) {
     setCreditScore(e.target.value);
@@ -154,7 +154,7 @@ const Home: NextPage = () => {
 
   /** API Call Functions */
 
-  const getCallDataFromServer = async () => {
+  const getCallDataFromServer = useCallback(async () => {
     try{
       const response =  await axios.get(`${generateCallDataUrl}?creditScore=${getCreditScore}`)
       return convertCallDataToIntegers(response.data);
@@ -163,7 +163,8 @@ const Home: NextPage = () => {
       console.log(error);
       return {};
     }
-  }
+  }, [getCreditScore]);
+  
 
   // Helper 
   const convertCallDataToIntegers = (responseData : {a:Array<string>,b:Array<Array<string>>,c:Array<string>,Input:Array<string>}) => {
@@ -191,13 +192,17 @@ const Home: NextPage = () => {
     }
     const callData = await getCallDataFromServer(); 
     setCallData(callData);
+    console.log("GET CALL DATA", getCallData);
+    mintSbt();
   }
 
-   function mintSbt() {
+  const mintSbt = () => {
     if (Object.keys(getCallData).length !== 0) {
       console.log("Call data minted", getCallData);
       mint?.();
-      return
+    }
+    else {
+      alert("Please try clicking the mint button again");
     }
   }
 
@@ -329,7 +334,6 @@ const Home: NextPage = () => {
               <span className="block">{
                 sbtData?.map((item, index) => {
                   return (
-                    // eslint-disable-next-line react/jsx-key
                     <a target="_blank" href="https://goerli.etherscan.io/address/0x51B543C4a9d38E747a3c1963b76E42d8Ad696ef4#readContract" rel="noreferrer"><p className="font-light break-all" key={index}>{item.toString().slice(0,30)}...</p></a>
                   )
                 })}

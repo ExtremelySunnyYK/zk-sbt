@@ -140,8 +140,8 @@ const Home: NextPage = () => {
   , [getVerificationAddress]);
 
   React.useEffect(() => {
-    console.log(getCallData)
     mintSbt();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   },[getCallData])
 
   function handleCreditScoreChange(e: any) {
@@ -329,6 +329,7 @@ const Home: NextPage = () => {
               <span className="block">{
                 sbtData?.map((item, index) => {
                   return (
+                    // eslint-disable-next-line react/jsx-key
                     <a target="_blank" href="https://goerli.etherscan.io/address/0x51B543C4a9d38E747a3c1963b76E42d8Ad696ef4#readContract" rel="noreferrer"><p className="font-light break-all" key={index}>{item.toString().slice(0,30)}...</p></a>
                   )
                 })}

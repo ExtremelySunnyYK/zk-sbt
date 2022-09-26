@@ -11,7 +11,7 @@ const port = 8080
 
 const corsOptions = {
   // To allow requests from client
-  origin: ['http://localhost:3000', 'http://localhost:3001', 'http://localhost:3002'],
+  origin: ['http://localhost:3000', 'http://localhost:3001', 'http://localhost:3002', 'https://zk-sbt-client-3o78-inbzq9wl1-zk-sbt.vercel.app/'],
   credentials: true,
   exposedHeaders: ['set-cookie'],
 };

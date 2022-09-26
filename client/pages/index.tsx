@@ -160,7 +160,7 @@ const Home: NextPage = () => {
       return convertCallDataToIntegers(response.data);
       
     } catch(error) {
-      console.log(error);
+      console.log(error.message);
       return {};
     }
   }, [getCreditScore]);

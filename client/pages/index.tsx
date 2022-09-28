@@ -274,18 +274,24 @@ const Home: NextPage = () => {
 
           <div className={styles.card}>
             <h2>2. Mint zkSBT with credit score &rarr;</h2>
-            <p>Generate zk Proofs and mint SBT with credit score 🤫 </p>
-              <form>
-              <label>
+            <p
+            className='mb-5'>
+              Generate zk Proofs and mint SBT with credit score 🤫 
+            </p>
+            <form>
+              <label 
+              className='font-light mt-5'>
                 Credit Score:
-                <input type="text" 
+              </label>
+              <input id="credit_score" 
+                type="text"
+                className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
                 placeholder='input credit score'
                 required
                 value={getCreditScore} 
                 onChange={handleCreditScoreChange} />
-              </label>
             </form>
-              <div style={{ padding: '12px 12px 12px 0' }}>
+              <div style={{ padding: '12px 0px 12px 100px' }}>
 
                 {mintError && (
                   <p style={{ marginTop: 2, color: '#FF6257' }}>
@@ -331,7 +337,7 @@ const Home: NextPage = () => {
 
             {mounted && isConnected && getHasSoul && (
               // <p>SBT Details: {sbtData}</p>
-              <span className="block">{
+              <span className="block ">{
                 sbtData?.map((item, index) => {
                   return (
                     <a target="_blank" href="https://goerli.etherscan.io/address/0x51B543C4a9d38E747a3c1963b76E42d8Ad696ef4#readContract" rel="noreferrer"><p className="font-light break-all" key={index}>{item.toString().slice(0,30)}...</p></a>
@@ -344,24 +350,26 @@ const Home: NextPage = () => {
 
           <div className={styles.card} >
             <h2>4. Verification of SBT &rarr;</h2>
-            <p>Input in any address to get the SBT data of their Soul. </p>
-            <p className='font-light'>
-              Verify if their credit score is above 5
-            </p>
+            <p className='text-sm'>Input in any address to verify if their credit score is above 5 </p>
             <form>
-              <label>
+              <label
+              >
                 Address to verify:
-                <input type="text" 
+              </label>
+              <input type="text" 
+                style={{ marginTop: 4 }}
+
+                className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
                 placeholder='input address you want to verify'
                 required
                 value={getVerificationAddress} 
                 onChange={handleVerificationAddressChange} />
-              </label>
             </form>
+            <div style={{ padding: '12px 0px 12px 100px' }}>
               {mounted && isConnected && (
                   <button
-                    style={{ marginTop: 2 }}
-                    className="button"
+                    style={{ marginTop: 4 }}
+                    className="button object-center"
                     onClick={handleVerifyButtonClick}
                   >
                     Verify
@@ -379,12 +387,13 @@ const Home: NextPage = () => {
             <p>Address does not have a SBT with credit score above 5</p>
             )}
           </div>
+          </div>
 
             
           </div>
         <div>
         <p>Contracts are deployed at:</p>
-          <a href="https://goerli.etherscan.io/address/0x03bDcf58fd0E6047E10206FB655A5BDFd724df6F"><p>Verifier.sol</p></a>
+          <a href="https://goerli.etherscan.io/address/0xA5578AF6d7d5dEA23020268004F6c2Fe3C2F0621"><p>Verifier.sol</p></a>
           <a href="https://goerli.etherscan.io/address/0x51B543C4a9d38E747a3c1963b76E42d8Ad696ef4"><p>zkSBT.sol</p></a>
         </div>
       </main>

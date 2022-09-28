@@ -44,7 +44,7 @@ contract zkSBT is Ownable {
     event Burn(address _soul);
     event Update(address _soul);
 
-    // Call data generated from proof and public signals
+    /** @dev Struct that contains call data generated from proof and public signals in snarkjs */ 
     struct Proof {
         uint256[2] a;
         uint256[2][2] b;

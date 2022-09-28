@@ -39,8 +39,6 @@ async function main() {
 		constructorArguments: ["Spartan Labs ZK SBT", "zkSBT"],
 	});
 
-
-
 	console.log("Contracts verified on Etherscan!");
 	console.log("Address of zkSBT contract:", zkSBT.address);
 	console.log("Address of Verifier contract:", verifier.address);

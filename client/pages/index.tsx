@@ -160,7 +160,7 @@ const Home: NextPage = () => {
       return convertCallDataToIntegers(response.data);
       
     } catch(error) {
-      console.log(error.message);
+      console.log(error);
       return {};
     }
   }, [getCreditScore]);
@@ -190,13 +190,14 @@ const Home: NextPage = () => {
       alert("Address already minted a SBT");
       return;
     }
-    const callData = await getCallDataFromServer(); 
-    setCallData(callData);
-    console.log("GET CALL DATA", getCallData);
+    await getCallDataFromServer(); 
+    // set state as a callback
+    // const data = setCallData({callData})
+    // mint?.();
     mintSbt();
   }
 
-  const mintSbt = () => {
+  const mintSbt = useCallback(() => {
     if (Object.keys(getCallData).length !== 0) {
       console.log("Call data minted", getCallData);
       mint?.();
@@ -204,7 +205,8 @@ const Home: NextPage = () => {
     else {
       alert("Please try clicking the mint button again");
     }
-  }
+  }, [getCallData, mint]);
+  
 
   async function handleVerifyButtonClick() {
     // check if the input is a valid address
@@ -286,7 +288,7 @@ const Home: NextPage = () => {
               <input id="credit_score" 
                 type="text"
                 className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
-                placeholder='input credit score'
+                placeholder='Input credit score'
                 required
                 value={getCreditScore} 
                 onChange={handleCreditScoreChange} />
@@ -294,12 +296,14 @@ const Home: NextPage = () => {
               <div style={{ padding: '12px 0px 12px 100px' }}>
 
                 {mintError && (
-                  <p style={{ marginTop: 2, color: '#FF6257' }}>
+                  <p style={{ marginTop: 2, color: '#FF6257' }}
+                  className="overflow-x-auto">
                     Error: {mintError.message}
                   </p>
                 )}
                 {txError && (
-                  <p style={{ marginTop: 2, color: '#FF6257' }}>
+                  <p style={{ marginTop: 2, color: '#FF6257' }}
+                  className="overflow-x-auto">
                     Error: {txError.message}
                   </p>
                 )}

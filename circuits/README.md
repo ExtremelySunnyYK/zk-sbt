@@ -1,6 +1,6 @@
 # circuits
 
-The circuits used for the demo are under `./circuits`
+The circuits used for the demo are under `./circuits/demo`
 
 The keys generated are included in there. 
 

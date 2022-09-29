@@ -190,9 +190,9 @@ const Home: NextPage = () => {
       alert("Address already minted a SBT");
       return;
     }
-    await getCallDataFromServer(); 
+    const callData = await getCallDataFromServer(); 
     // set state as a callback
-    // const data = setCallData({callData})
+    setCallData(callData)
     // mint?.();
     mintSbt();
   }

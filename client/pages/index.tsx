@@ -268,7 +268,7 @@ const Home: NextPage = () => {
         <div className={styles.card}>
           <h2>2. Mint zkSBT with credit score &rarr;</h2>
           <p
-          className='mb-5'>
+          className='pb-5'>
             Generate zk Proofs and mint SBT with credit score 🤫 
           </p>
           <form>
@@ -344,10 +344,9 @@ const Home: NextPage = () => {
 
           <div className={styles.card} >
             <h2>4. Verification of SBT &rarr;</h2>
-            <p className='text-sm'>Input in any address to verify if their credit score is above 5 </p>
+            <p className='text-sm pb-5'>Input in any address to verify if their credit score is above 5 </p>
             <form>
-              <label
-              >
+              <label className='font-light mt-5'>
                 Address to verify:
               </label>
               <input type="text" 

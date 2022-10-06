@@ -33,7 +33,7 @@ const Header = (props: { isConnected: boolean }) => (
                 </li>
               )}
               <li>
-                <Link href="https://github.com/SpartanLabsXyz/zk-sbt">
+                <Link target="_blank" href="https://github.com/SpartanLabsXyz/zk-sbt">
                   <span className="text-black transition hover:text-gray-500/75 mt-5 hover:cursor-pointer">
                     CODE
                   </span>
@@ -41,7 +41,7 @@ const Header = (props: { isConnected: boolean }) => (
               </li>
 
               <li>
-                <Link href="https://medium.com/@spartanlabs/the-construction-of-the-soul-part-3-soulbound-token-with-zk-snark-implementation-900d808b9e79">
+                <Link target="_blank" href="https://medium.com/@spartanlabs/the-construction-of-the-soul-part-3-soulbound-token-with-zk-snark-implementation-900d808b9e79">
                   <span className="text-black transition hover:text-gray-500/75 mt-5 hover:cursor-pointer">
                     ARTICLE
                   </span>

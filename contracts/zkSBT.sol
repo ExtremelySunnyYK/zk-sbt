@@ -6,8 +6,7 @@ pragma solidity >=0.6.0 <0.9.0;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
 
-// Import Verifier.Sol for zkSNARK verification
-// import "./Verifier.sol";
+/// @dev Import Verifier.Sol for zkSNARK verification
 interface IVerifier {
     function verifyProof(
         uint256[2] memory a,

@@ -9,6 +9,7 @@ import { BigNumber, utils } from 'ethers';
 import Link from 'next/link'
 import Image from 'next/image'
 import { useCallback } from 'react';
+import Header from './components/header';
 
 import {
   useAccount,
@@ -246,22 +247,13 @@ const Home: NextPage = () => {
         />
         <link rel="icon" href="/favicon.png" />
       </Head>
+      <Header isConnected />
 
       <main className={styles.main}>
-        <ConnectButton />
         <div className='md:container md:mx-auto'>
         <h1 className={styles.title}>
             zKSBT Mint Demo by <a href="https://spartanlabs.studio/">Spartan Labs</a>
           </h1>
-          <span className='flex items-center justify-center pb-5'>
-                       <Image
-            className='object-none object-center'
-            alt="Spartan Labs Logo"
-            src="/favicon.png"
-            width={50}
-            height={50}
-            />
-          </span>
         </div>
         <p className={styles.description}>
           {totalMinted} Soul Bound Token minted so far!
@@ -273,74 +265,72 @@ const Home: NextPage = () => {
             <p>Before you do anything, you need some Goerlli ETH from Faucet🚰</p>
           </a>
         </div>
+        <div className={styles.card}>
+          <h2>2. Mint zkSBT with credit score &rarr;</h2>
+          <p
+          className='mb-5'>
+            Generate zk Proofs and mint SBT with credit score 🤫 
+          </p>
+          <form>
+            <label 
+            className='font-light mt-5'>
+              Credit Score:
+            </label>
+            <input id="credit_score" 
+              type="text"
+              className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+              placeholder='Input a positive integer as credit score'
+              required
+              value={getCreditScore} 
+              onChange={handleCreditScoreChange} />
+          </form>
+            <div style={{ padding: '12px 0px 12px 100px' }}>
 
-          <div className={styles.card}>
-            <h2>2. Mint zkSBT with credit score &rarr;</h2>
-            <p
-            className='mb-5'>
-              Generate zk Proofs and mint SBT with credit score 🤫 
-            </p>
-            <form>
-              <label 
-              className='font-light mt-5'>
-                Credit Score:
-              </label>
-              <input id="credit_score" 
-                type="text"
-                className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
-                placeholder='Input credit score'
-                required
-                value={getCreditScore} 
-                onChange={handleCreditScoreChange} />
-            </form>
-              <div style={{ padding: '12px 0px 12px 100px' }}>
+              {mintError && (
+                <p style={{ marginTop: 2, color: '#FF6257' }}
+                className="overflow-x-auto">
+                  Error: {mintError.message}
+                </p>
+              )}
+              {txError && (
+                <p style={{ marginTop: 2, color: '#FF6257' }}
+                className="overflow-x-auto">
+                  Error: {txError.message}
+                </p>
+              )}
 
-                {mintError && (
-                  <p style={{ marginTop: 2, color: '#FF6257' }}
-                  className="overflow-x-auto">
-                    Error: {mintError.message}
-                  </p>
-                )}
-                {txError && (
-                  <p style={{ marginTop: 2, color: '#FF6257' }}
-                  className="overflow-x-auto">
-                    Error: {txError.message}
-                  </p>
-                )}
-
-                {mounted && isConnected && !isMinted && (
-                  <button
-                    style={{ marginTop: 2 }}
-                    disabled={isMintLoading || isMintStarted}
-                    className="button object-center"
-                    data-mint-loading={isMintLoading}
-                    data-mint-started={isMintStarted}
-                    onClick={() => handleMintButtonClick()}
-                  >
-                    {isMintLoading && 'Waiting for approval'}
-                    {isMintStarted && 'Minting...'}
-                    {!isMintLoading && !isMintStarted && 'Mint'}
-                  </button>
-                )}
-                {mounted && isConnected && isMinted && (
-                  <div>
-                  <p>Transaction Minted to</p>
-                    <a href={`https://goerli.etherscan.io/tx/${mintData?.hash}`} target="_blank" rel="noreferrer">{mintData?.hash.slice(0, 10)}...</a>
-                  </div>
-                )}
-            </div>
+              {mounted && isConnected && !isMinted && (
+                <button
+                  style={{ marginTop: 2 }}
+                  disabled={isMintLoading || isMintStarted}
+                  className="button object-center"
+                  data-mint-loading={isMintLoading}
+                  data-mint-started={isMintStarted}
+                  onClick={() => handleMintButtonClick()}
+                >
+                  {isMintLoading && 'Waiting for approval'}
+                  {isMintStarted && 'Minting...'}
+                  {!isMintLoading && !isMintStarted && 'Mint'}
+                </button>
+              )}
+              {mounted && isConnected && isMinted && (
+                <div>
+                <p>Transaction Minted to</p>
+                  <a href={`https://goerli.etherscan.io/tx/${mintData?.hash}`} target="_blank" rel="noreferrer">{mintData?.hash.slice(0, 10)}...</a>
+                </div>
+              )}
           </div>
+        </div>
 
 
-          <a 
-            className={styles.card}
+          <div
+            className={styles.card + ' w-96'}
           >
             <div className="container mx-auto">
               <h2>3. View SBT details &rarr;</h2>
               <p>View your SBT details: </p>
 
             {mounted && isConnected && getHasSoul && (
-              // <p>SBT Details: {sbtData}</p>
               <span className="block ">{
                 sbtData?.map((item, index) => {
                   return (
@@ -350,7 +340,7 @@ const Home: NextPage = () => {
                 </span>
               )}
             </div>
-          </a>
+          </div>
 
           <div className={styles.card} >
             <h2>4. Verification of SBT &rarr;</h2>
@@ -364,7 +354,7 @@ const Home: NextPage = () => {
                 style={{ marginTop: 4 }}
 
                 className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
-                placeholder='input address you want to verify'
+                placeholder='Input an address you want to verify'
                 required
                 value={getVerificationAddress} 
                 onChange={handleVerificationAddressChange} />

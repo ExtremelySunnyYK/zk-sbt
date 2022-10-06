@@ -9,40 +9,11 @@ const Header = (props: { isConnected: boolean }) => (
         <div className="flex-1 md:flex md:items-center md:gap-12">
           <Link href="/">
             <div className="block text-black hover:text-gray-500/75 mt-5 hover:cursor-pointer">
-              <span className="sr-only">Home</span>
-              <svg
-                width="48"
-                strokeWidth="1.5"
-                height="48"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M4.40434 13.6099C3.51517 13.1448 3 12.5924 3 12C3 10.3431 7.02944 9 12 9C16.9706 9 21 10.3431 21 12C21 12.7144 20.2508 13.3705 19 13.8858"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M12 11.01L12.01 10.9989"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M16.8827 6C16.878 4.97702 16.6199 4.25309 16.0856 3.98084C14.6093 3.22864 11.5832 6.20912 9.32664 10.6379C7.07005 15.0667 6.43747 19.2668 7.91374 20.019C8.44117 20.2877 9.16642 20.08 9.98372 19.5"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M9.60092 4.25164C8.94056 3.86579 8.35719 3.75489 7.91369 3.98086C6.43742 4.73306 7.06999 8.93309 9.32658 13.3619C11.5832 17.7907 14.6092 20.7712 16.0855 20.019C17.3977 19.3504 17.0438 15.9577 15.3641 12.1016"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
+              <span padding-bottom="25px" className="sr-only">Home</span>
+              <svg width="440" height="100" viewBox="0 0 1353 232" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M264.251 146.377V132.686H305.321V118.996H277.941V105.306H264.251V91.6159H277.941V77.9257H332.702V91.6159H291.631V105.306H319.012V118.996H332.702V132.686H319.012V146.377H264.251ZM360.045 146.377V77.9257H414.805V91.6159H428.496V105.306H414.805V118.996H387.425V146.377H360.045ZM387.425 105.306H401.115V91.6159H387.425V105.306ZM504.85 91.6159H518.54V146.377H491.159V118.996H477.469V146.377H450.089V91.6159H463.779V77.9257H504.85V91.6159ZM477.469 105.306H491.159V91.6159H477.469V105.306ZM545.883 146.377V77.9257H600.643V91.6159H614.334V105.306H600.643V132.686H614.334V146.377H586.953V132.686H573.263V146.377H545.883ZM573.263 105.306H586.953V91.6159H573.263V105.306ZM654.217 146.377V91.6159H640.527V77.9257H695.287V91.6159H681.597V146.377H654.217ZM777.38 91.6159H791.071V146.377H763.69V118.996H750V146.377H722.62V91.6159H736.31V77.9257H777.38V91.6159ZM750 105.306H763.69V91.6159H750V105.306ZM818.414 146.377V77.9257H845.794V91.6159H859.484V105.306H873.174V77.9257H900.555V146.377H873.174V132.686H859.484V118.996H845.794V146.377H818.414ZM1023.79 132.686H1051.17V146.377H996.413V77.9257H1023.79V132.686ZM1133.27 91.6159H1146.96V146.377H1119.58V118.996H1105.89V146.377H1078.51V91.6159H1092.2V77.9257H1133.27V91.6159ZM1105.89 105.306H1119.58V91.6159H1105.89V105.306ZM1174.3 146.377V77.9257H1229.06V91.6159H1242.75V105.306H1229.06V118.996H1242.75V132.686H1229.06V146.377H1174.3ZM1201.68 105.306H1215.37V91.6159H1201.68V105.306ZM1201.68 132.686H1215.37V118.996H1201.68V132.686ZM1267.79 146.377V132.686H1308.86V118.996H1281.48V105.306H1267.79V91.6159H1281.48V77.9257H1336.24V91.6159H1295.17V105.306H1322.55V118.996H1336.24V132.686H1322.55V146.377H1267.79Z" fill="#292929"/>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M108.245 7.72511V15.4502H131.42H154.595V38.6256V61.8009H166.183H177.771V96.5639V131.327H173.908H170.046V158.365V185.403H162.321H154.595V196.99V208.578H146.87H139.145V220.166V231.753H127.558H115.97V177.678V123.602H127.558H139.145V115.877V108.152H119.832H100.52V127.464V146.777H88.932H77.3444V127.464V108.152H58.0316H38.7188V115.877V123.602H50.3065H61.8941V177.678V231.753H50.3065H38.7188V220.166V208.578H30.9937H23.2686V196.99V185.403H15.5435H7.81834V158.365V131.327H3.95578H0.0932312V96.5639V61.8009H11.6809H23.2686V38.6256V15.4502H46.4439H69.6192V7.72511V0H88.932H108.245V7.72511Z" fill="black"/>
+                </svg>
             </div>
           </Link>
         </div>
@@ -62,7 +33,7 @@ const Header = (props: { isConnected: boolean }) => (
                 </li>
               )}
               <li>
-                <Link href="/">
+                <Link href="https://github.com/SpartanLabsXyz/zk-sbt">
                   <span className="text-black transition hover:text-gray-500/75 mt-5 hover:cursor-pointer">
                     CODE
                   </span>
@@ -70,9 +41,9 @@ const Header = (props: { isConnected: boolean }) => (
               </li>
 
               <li>
-                <Link href="/">
+                <Link href="https://medium.com/@spartanlabs/the-construction-of-the-soul-part-3-soulbound-token-with-zk-snark-implementation-900d808b9e79">
                   <span className="text-black transition hover:text-gray-500/75 mt-5 hover:cursor-pointer">
-                    ABOUT
+                    ARTICLE
                   </span>
                 </Link>
               </li>

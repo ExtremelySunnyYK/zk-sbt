@@ -6,9 +6,11 @@ import styles from '../styles/Home.module.css';
 import axios from 'axios';
 import { generateProofUrl, generateCallDataUrl } from '../globals/urlConfig';
 import { BigNumber, utils } from 'ethers';
-import Link from 'next/link'
-import Image from 'next/image'
 import { useCallback } from 'react';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
+
+
 import Header from './components/header';
 import CallToAction from './components/cta';
 
@@ -258,20 +260,21 @@ const Home: NextPage = () => {
           </h1>
         </div>
         <p className={styles.description}>
-          {totalMinted} Soul Bound Token minted so far!
+          {totalMinted} ZK SoulBound Tokens minted so far!
         </p>
         <div className='pb-5'>
         <iframe width="560" height="315" src="https://www.youtube.com/embed/LVodDwOEi3o" frameBorder="1" allowfullscreen></iframe>
         </div>
         <div className={styles.grid}>
           <a href="https://faucet.paradigm.xyz/" target="_blank" className={styles.card} rel="noreferrer">
-            <h2>1. Get some Testnet ETH &rarr;</h2>
+            <h2>1. Get some Testnet ETH
+            <FontAwesomeIcon className="ml-3" icon={faArrowUpRightFromSquare} /> </h2>
             <p>Before you do anything, you need some Goerlli ETH from Faucet🚰</p>
           </a>
         </div>
         
         <div className={styles.card}>
-          <h2>2. Mint zkSBT with credit score &rarr;</h2>
+          <h2>2. Mint zkSBT with credit score</h2>
           <p
           className='pb-5'>
             Generate zk Proofs and mint SBT with credit score 🤫 
@@ -332,8 +335,8 @@ const Home: NextPage = () => {
             className={styles.card + ' w-96'}
           >
             <div className="container mx-auto">
-              <h2>3. View SBT details &rarr;</h2>
-              <p>View your SBT details: </p>
+              <h2>3. View SBT details</h2>
+              <p>View your SBT details ⬇️</p>
 
             {mounted && isConnected && getHasSoul && (
               <span className="block ">{

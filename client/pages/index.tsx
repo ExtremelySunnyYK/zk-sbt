@@ -246,6 +246,7 @@ const Home: NextPage = () => {
           content="by @spartan-labs"
         />
         <link rel="icon" href="/favicon.png" />
+
       </Head>
       <Header isConnected />
 

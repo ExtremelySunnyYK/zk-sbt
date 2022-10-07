@@ -6,6 +6,11 @@ import { chain, configureChains, createClient, WagmiConfig } from 'wagmi';
 import { alchemyProvider } from 'wagmi/providers/alchemy';
 import { publicProvider } from 'wagmi/providers/public';
 
+import '@fortawesome/fontawesome-svg-core/styles.css'; //importing font awesome css
+import { config } from '@fortawesome/fontawesome-svg-core';
+config.autoAddCss = false; // Tell Font Awesome to skip adding the CSS automatically since it's being imported above
+
+
 const { chains, provider, webSocketProvider } = configureChains(
   [
     chain.goerli,

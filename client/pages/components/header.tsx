@@ -2,6 +2,14 @@ import { ConnectButton } from "@rainbow-me/rainbowkit";
 import React from "react";
 import Link from "next/link";
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faYoutube,
+  faFacebook,
+  faTwitter,
+  faInstagram
+} from "@fortawesome/free-brands-svg-icons";
+
 const Header = (props: { isConnected: boolean }) => (
   <header>
     <div className="max-w-screen-xl px-4 mx-auto sm:px-6 lg:px-8">
@@ -50,7 +58,8 @@ const Header = (props: { isConnected: boolean }) => (
               {/* Twitter */}
               <li>
                 <a target="_blank" href="https://twitter.com/TheSpartanLabs">
-                  <span className="text-black transition hover:text-gray-500/75 mt-5 hover:cursor-pointer">
+                  <span><FontAwesomeIcon icon={faTwitter} /></span>
+                  <span className="text-black transition hover:text-gray-500/75 mt-5 hover:cursor-pointer pl-1">
                     TWITTER
                   </span>
                 </a>

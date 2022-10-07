@@ -13,6 +13,8 @@ import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 
 import Header from './components/header';
 import CallToAction from './components/cta';
+import Modal from './components/modal';
+
 
 import {
   useAccount,
@@ -48,6 +50,7 @@ const Home: NextPage = () => {
   const [getVerificationAddress, setVerificationAddress] = React.useState('');
   const [getCallData, setCallData] = React.useState({});
   const [getVerificationStatus, setVerificationStatus] = React.useState(null);
+  const [open, setOpen] = React.useState(false)
 
 
   // get wallet address
@@ -249,9 +252,9 @@ const Home: NextPage = () => {
           content="by @spartan-labs"
         />
         <link rel="icon" href="/favicon.png" />
-
       </Head>
       <Header isConnected />
+
 
       <main className={styles.main}>
         <div className='md:container md:mx-auto'>
@@ -259,9 +262,7 @@ const Home: NextPage = () => {
             zKSBT Mint Demo by <a href="https://spartanlabs.studio/">Spartan Labs</a>
           </h1>
         </div>
-        <span>
-
-        </span>
+        <Modal/>
         <p className={styles.description}>
           {totalMinted} ZK SoulBound Tokens minted so far!
         </p>

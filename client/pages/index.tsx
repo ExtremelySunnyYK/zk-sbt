@@ -259,11 +259,14 @@ const Home: NextPage = () => {
             zKSBT Mint Demo by <a href="https://spartanlabs.studio/">Spartan Labs</a>
           </h1>
         </div>
+        <span>
+
+        </span>
         <p className={styles.description}>
           {totalMinted} ZK SoulBound Tokens minted so far!
         </p>
         <div className='pb-5'>
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/LVodDwOEi3o" frameBorder="1" allowfullscreen></iframe>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/LVodDwOEi3o" frameBorder="1" allowFullScreen></iframe>
         </div>
         <div className={styles.grid}>
           <a href="https://faucet.paradigm.xyz/" target="_blank" className={styles.card} rel="noreferrer">

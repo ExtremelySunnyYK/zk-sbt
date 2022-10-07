@@ -351,7 +351,7 @@ const Home: NextPage = () => {
           </div>
 
           <div className={styles.card} >
-            <h2>4. Verification of SBT &rarr;</h2>
+            <h2>4. Verification of SBT</h2>
             <p className='text-sm pb-5'>Input in any address to verify if their credit score is above 5 </p>
             <form>
               <label className='font-light mt-5'>

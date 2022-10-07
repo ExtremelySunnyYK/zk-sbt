@@ -40,24 +40,22 @@ export default function Modal() {
                     For greater Web3 adoption in various use cases, storing of users’ specific data on-chain is critical.
                   </p>
                   <p className="my-4 text-slate-500 text-lg leading-relaxed">
-                    However, this has been challenging as having sensitive data on the blockchain exposes users to doxxing and potential malicious attacks.
+                  However, this has been challenging to implement as having sensitive data on the blockchain exposes users to doxxing and potential malicious attacks due to the blockchain's public nature.
                   </p>
                   <p className="my-4 text-slate-500 text-lg leading-relaxed">
-                    Enter Zero-Knowledge SoulBound Token (zkSBT)
+                    Enter Zero-Knowledge Soulbound Tokens (zkSBT).
                   </p>  
                   <p className="my-4 text-slate-500 text-lg leading-relaxed">
-                    zkSBT is Non Transferable token that is bounded to a user's address. However the data stored on the token is encrypted but can be publicly verified.
+                    A zkSBT is a non-transferable tokens that is bounded to a user's address. However, the data stored on the token is encrypted but can be publicly verified.
                   </p>
                   <p className="my-4 text-slate-500 text-lg leading-relaxed">
-                    In our demo we are assuming the role of a undercollaterized lending protocol who wants to verify the creditworthiness of a user without knowing the actual credit score.
+                    In our demo, we are assuming the role of a undercollaterized lending protocol who wants to verify the creditworthiness of a user without knowing their actual credit score.
                   </p>
                   <p className="my-4 text-slate-500 text-lg leading-relaxed">
-                    Users are able to mint a SBT with an arbitary credit score. The credit score is then used to generate the proof and the proof is stored on the blockchain.
-
-                    Anybody including the undercollaterized lending protocol can then verify whether the credit score is above the threshold of 5 without knowing the actual credit score.
-                    </p>
+                    Users are able to mint a SBT with an arbitary credit score. The credit score is then used to generate the proof and the proof is stored on the blockchain. Anybody including the undercollaterized lending protocol can then verify whether the credit score is above the threshold of 5 without knowing the user's actual credit score.
+                  </p>
                     <p className="my-4 text-slate-500 text-lg leading-relaxed">
-                    This is the power of Zero-Knowledge Technology, where sensitive data can be stored on the blockchain in a way that is both secured and publicly verifiable.
+                      This is the power of Zero-Knowledge Technology, where sensitive data can be stored on the blockchain in a way that is both secured and publicly verifiable.
                   </p>
                   <p className="my-4 text-slate-500 text-lg leading-relaxed">
                     The concept of zkSBT would be revolutionary for a Web3 future where we reap the benefits of traditional interdependent economic relations while maintaining anonymity.

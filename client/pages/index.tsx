@@ -10,6 +10,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { useCallback } from 'react';
 import Header from './components/header';
+import CallToAction from './components/cta';
 
 import {
   useAccount,
@@ -259,13 +260,16 @@ const Home: NextPage = () => {
         <p className={styles.description}>
           {totalMinted} Soul Bound Token minted so far!
         </p>
-
+        <div className='pb-5'>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/LVodDwOEi3o" frameBorder="1" allowfullscreen></iframe>
+        </div>
         <div className={styles.grid}>
           <a href="https://faucet.paradigm.xyz/" target="_blank" className={styles.card} rel="noreferrer">
             <h2>1. Get some Testnet ETH &rarr;</h2>
             <p>Before you do anything, you need some Goerlli ETH from Faucet🚰</p>
           </a>
         </div>
+        
         <div className={styles.card}>
           <h2>2. Mint zkSBT with credit score &rarr;</h2>
           <p
@@ -385,11 +389,13 @@ const Home: NextPage = () => {
 
             
           </div>
-        <div>
+          <CallToAction/>
+
+        {/* <div>
         <p>Contracts are deployed at:</p>
           <a href="https://goerli.etherscan.io/address/0xA5578AF6d7d5dEA23020268004F6c2Fe3C2F0621"><p>Verifier.sol</p></a>
           <a href="https://goerli.etherscan.io/address/0x51B543C4a9d38E747a3c1963b76E42d8Ad696ef4"><p>zkSBT.sol</p></a>
-        </div>
+        </div> */}
       </main>
 
       <footer className={styles.footer}>

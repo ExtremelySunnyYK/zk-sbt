@@ -267,7 +267,7 @@ const Home: NextPage = () => {
           {totalMinted} ZK SoulBound Tokens minted so far!
         </p>
         <div className='pb-5'>
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/LVodDwOEi3o" frameBorder="1" allowFullScreen></iframe>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/NzMoTb6QBKc" frameBorder="1" allowFullScreen></iframe>
         </div>
         <div className={styles.grid}>
           <a href="https://faucet.paradigm.xyz/" target="_blank" className={styles.card} rel="noreferrer">

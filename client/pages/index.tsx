@@ -104,7 +104,7 @@ const Home: NextPage = () => {
     ...zksbtContractConfig,
     functionName: 'validateAttribute',
     // wallet address as arg
-    cacheTime: 2_000,
+    cacheTime: 200,
     // enabled: false,
     args: [getVerificationAddress, verifierContractAddress]
   });
@@ -358,7 +358,7 @@ const Home: NextPage = () => {
             <h2>4. Verification of SBT</h2>
             <p className='text-sm pb-5'>Input in any address to verify if their credit score is above 5 </p>
             <form>
-              <label className='font-light mt-5'>
+              <label title="Try clicking again if its unverified" className='font-light mt-5'>
                 Address to verify:
               </label>
               <input type="text" 
@@ -379,6 +379,7 @@ const Home: NextPage = () => {
                   >
                     Verify
                   </button>
+                  
           )}
           
           <div>

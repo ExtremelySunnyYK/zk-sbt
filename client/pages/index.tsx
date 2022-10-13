@@ -195,6 +195,10 @@ const Home: NextPage = () => {
       alert("Address already minted a SBT");
       return;
     }
+    if (parseInt(getCreditScore) > 100){
+      alert("Credit Score cannot be greater than 100");
+      return;
+    }
     const callData = await getCallDataFromServer(); 
     // set state as a callback
     setCallData(callData)
@@ -279,7 +283,7 @@ const Home: NextPage = () => {
           <h2>2. Mint zkSBT with credit score</h2>
           <p
           className='pb-5'>
-            Generate zk Proofs and mint SBT with credit score 🤫 
+            Generate zk Proofs and mint SBT with credit score between 0 to 100
           </p>
           <form>
             <label 

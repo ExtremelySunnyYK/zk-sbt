@@ -273,7 +273,7 @@ const Home: NextPage = () => {
           <a href="https://faucet.paradigm.xyz/" target="_blank" className={styles.card} rel="noreferrer">
             <h2>1. Get some Testnet ETH
             <FontAwesomeIcon className="ml-3" icon={faArrowUpRightFromSquare} /> </h2>
-            <p>Before you do anything, you need some Goerlli ETH from Faucet🚰</p>
+            <p>Before you do anything, you need some Goerli ETH from Faucet🚰</p>
           </a>
         </div>
         

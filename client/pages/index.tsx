@@ -103,9 +103,7 @@ const Home: NextPage = () => {
   const { data: addressVerified } = useContractRead({
     ...zksbtContractConfig,
     functionName: 'validateAttribute',
-    // wallet address as arg
-    cacheTime: 200,
-    // enabled: false,
+    watch: true,
     args: [getVerificationAddress, verifierContractAddress]
   });
 

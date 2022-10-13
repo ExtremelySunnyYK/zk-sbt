@@ -11,7 +11,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 
 
-import Header from './components/header';
+import Header from './components/hamburgHeader';
 import CallToAction from './components/cta';
 import Modal from './components/modal';
 

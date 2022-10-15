@@ -138,16 +138,11 @@ const Home: NextPage = () => {
   }, [hasSoul]);
 
   React.useEffect(() => {
-      if (getVerificationAddress) {
-        setVerificationAddress(getVerificationAddress);
+      if (addressVerified) {
+        setVerificationStatus(true);
       }
     }
   , [getVerificationAddress]);
-
-  // React.useEffect(() => {
-  //   console.log(getCallData)
-  //   mintSbt();
-  // },[getCallData]);
 
   function handleCreditScoreChange(e: any) {
     setCreditScore(e.target.value);
@@ -195,10 +190,10 @@ const Home: NextPage = () => {
       alert("Address already minted a SBT");
       return;
     }
-    if (parseInt(getCreditScore) > 100){
-      alert("Credit Score cannot be greater than 100");
-      return;
-    }
+    // if (parseInt(getCreditScore) > 100){
+    //   alert("Credit Score cannot be greater than 100");
+    //   return;
+    // }
     const callData = await getCallDataFromServer(); 
     // set state as a callback
     setCallData(callData)

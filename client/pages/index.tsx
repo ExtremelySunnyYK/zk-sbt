@@ -149,6 +149,9 @@ const Home: NextPage = () => {
   }
   function handleVerificationAddressChange(e: any) {
     setVerificationAddress(e.target.value);
+    if (addressVerified) {
+        setVerificationStatus(true);
+      }
   }
 
 

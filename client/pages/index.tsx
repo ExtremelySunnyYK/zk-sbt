@@ -14,6 +14,7 @@ import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 import Header from './components/hamburgHeader';
 import CallToAction from './components/cta';
 import Modal from './components/modal';
+import YoutubeIframe from './components/youtubeIframe';
 
 
 import {
@@ -266,15 +267,17 @@ const Home: NextPage = () => {
         <p className={styles.description}>
           {totalMinted} ZK SoulBound Tokens minted so far!
         </p>
-        <div className='pb-5'>
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/NzMoTb6QBKc" frameBorder="1" allowFullScreen></iframe>
-        </div>
         <div className={styles.grid}>
+          <div className='md:container md:mx-auto pb-5'>
+            <YoutubeIframe videoId="NzMoTb6QBKc" videoTitle="zkSBT Demo" />
+          </div>
+
           <a href="https://faucet.paradigm.xyz/" target="_blank" className={styles.card} rel="noreferrer">
             <h2>1. Get some Testnet ETH
             <FontAwesomeIcon className="ml-3" icon={faArrowUpRightFromSquare} /> </h2>
             <p>Before you do anything, you need some Goerli ETH from Faucet🚰</p>
           </a>
+          
         </div>
         
         <div className={styles.card}>

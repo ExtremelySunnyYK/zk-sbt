@@ -6,7 +6,7 @@ This follows part 3 of Spartan Labs Soul Bound Token Article series:
 
 - [Part 1: The ABCs of SBT](https://medium.com/@spartanlabs/the-construction-of-the-soul-part-1-the-abcs-of-sbt-5f7776a88479)
 - [Part 2: Implementations of SBT](https://medium.com/the-spartan-group/the-construction-of-the-soul-part-2-implementations-of-sbt-4afb34e09ec8)
-- Part 3: zkSBT
+- [Part 3: zkSBT](https://medium.com/the-spartan-group/the-construction-of-the-soul-part-3-soulbound-token-with-zk-snark-implementation-900d808b9e79)
 
 ## Demo of ZKSBT
 
